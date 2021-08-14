@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace BibliotecaAPI.Controllers
 {
     [ApiController]
-    [Route("api/{controller}")]
+    [Route("api/libros")]    
     public class LibrosController:ControllerBase
     {
         private readonly ApplicationDbContext context;
@@ -36,7 +36,7 @@ namespace BibliotecaAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult>Post(Libro libro)
+        public async Task<ActionResult>PostLibro(Libro libro)
         {
             var existe = await context.Autor.AnyAsync(x => x.Id == libro.AutorId);
             if (!existe)
@@ -47,7 +47,7 @@ namespace BibliotecaAPI.Controllers
             return Ok();
         }
 
-        [HttpPut("{id:int}")]
+        [HttpPut("{id:int}")]        
         public async Task<ActionResult> Put(int id, Libro libro)
         {
             var existeLibro = await context.Libro.AnyAsync(x => x.Id == id);

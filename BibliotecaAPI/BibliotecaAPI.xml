@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BibliotecaAPI</name>
+    </assembly>
+    <members>
+        <member name="M:BibliotecaAPI.Controllers.AutoresController.Get">
+            <summary>
+            hola este es un get
+            </summary>
+            <remarks>y este es un remark</remarks>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

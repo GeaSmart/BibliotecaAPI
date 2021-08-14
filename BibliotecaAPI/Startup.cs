@@ -13,6 +13,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Reflection;
+using System.IO;
 
 namespace BibliotecaAPI
 {
@@ -34,6 +36,24 @@ namespace BibliotecaAPI
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("default")));
+
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xlmPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+            services.AddSwaggerGen(config =>
+                {
+                    config.SwaggerDoc("v1",
+                            new Microsoft.OpenApi.Models.OpenApiInfo()
+                            {
+                                Title = "Documentación del API Biblioteca",
+                                Description="Esta es la documentación oficial de esta api experimental y didáctica"
+                            }
+                        );
+                    config.IncludeXmlComments(xlmPath);
+                    //config.ResolveConflictingActions(apidescriptions => apidescriptions.First());
+                }                    
+            );
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +74,14 @@ namespace BibliotecaAPI
             {
                 endpoints.MapControllers();
             });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(config =>
+                {
+                    config.SwaggerEndpoint("/swagger/v1/swagger.json", "API OFICIAL V1");
+                    config.RoutePrefix = "";
+                }
+            );
         }
     }
 }

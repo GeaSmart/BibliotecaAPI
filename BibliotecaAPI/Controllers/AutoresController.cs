@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 namespace BibliotecaAPI.Controllers
 {
     [ApiController]
-    [Route("api/{controller}")]
-    public class AutoresController:ControllerBase
+    [Route("api/autores")]
+    public class AutoresController : ControllerBase
     {
         private readonly ApplicationDbContext context;
 
@@ -19,7 +19,13 @@ namespace BibliotecaAPI.Controllers
             this.context = context;
         }
 
+        /// <summary>
+        /// hola este es un get
+        /// </summary>
+        /// <remarks>y este es un remark</remarks>
+        /// <returns></returns>
         [HttpGet]
+        
         public async Task<ActionResult<List<Autor>>> Get()
         {
             return await context.Autor.Include(x => x.Libros).ToListAsync();
@@ -28,7 +34,7 @@ namespace BibliotecaAPI.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Autor>> Get(int id)
         {
-            return await context.Autor.Include(x=>x.Libros).FirstOrDefaultAsync(x => x.Id == id);
+            return await context.Autor.Include(x => x.Libros).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         [HttpPost]
@@ -45,7 +51,7 @@ namespace BibliotecaAPI.Controllers
             var existe = await context.Autor.AnyAsync(x => x.Id == id);
             if (!existe)
                 return NotFound("No existe el mencionado autor");
-                        
+
             if (id != autor.Id)
                 return BadRequest("Los id no coinciden");
 
