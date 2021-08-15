@@ -20,10 +20,12 @@ namespace BibliotecaAPI.Controllers
         }
 
         /// <summary>
-        /// hola este es un get
+        /// Obtiene todos los autores
         /// </summary>
-        /// <remarks>y este es un remark</remarks>
-        /// <returns></returns>
+        /// <remarks>Autores asociados al sindicato.</remarks>
+        /// <returns>Valor de retorno</returns>
+        /// <response code="200">Respuesta correcta</response>
+        /// <response code="400">Bad request</response>
         [HttpGet]
         
         public async Task<ActionResult<List<Autor>>> Get()

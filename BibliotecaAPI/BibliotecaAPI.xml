@@ -6,10 +6,32 @@
     <members>
         <member name="M:BibliotecaAPI.Controllers.AutoresController.Get">
             <summary>
-            hola este es un get
+            Obtiene todos los autores
             </summary>
-            <remarks>y este es un remark</remarks>
-            <returns></returns>
+            <remarks>Autores asociados al sindicato.</remarks>
+            <returns>Valor de retorno</returns>
+            <response code="200">Respuesta correcta</response>
+            <response code="400">Bad request</response>
+        </member>
+        <member name="P:BibliotecaAPI.Entidades.Autor.Id">
+            <summary>
+            Identificador del autor
+            </summary>
+        </member>
+        <member name="P:BibliotecaAPI.Entidades.Autor.Nombre">
+            <summary>
+            Nombre del autor
+            </summary>
+        </member>
+        <member name="P:BibliotecaAPI.Entidades.Autor.FechaInscripcion">
+            <summary>
+            fecha de inscripcion del autor en el sindicato
+            </summary>
+        </member>
+        <member name="P:BibliotecaAPI.Entidades.Autor.Libros">
+            <summary>
+            Colección de libros del autor
+            </summary>
         </member>
     </members>
 </doc>
