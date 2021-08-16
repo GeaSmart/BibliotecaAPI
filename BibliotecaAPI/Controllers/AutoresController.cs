@@ -1,4 +1,5 @@
 ﻿using BibliotecaAPI.Entidades;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,6 +11,7 @@ namespace BibliotecaAPI.Controllers
 {
     [ApiController]
     [Route("api/autores")]
+    [Authorize]
     public class AutoresController : ControllerBase
     {
         private readonly ApplicationDbContext context;

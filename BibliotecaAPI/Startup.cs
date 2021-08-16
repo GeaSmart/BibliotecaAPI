@@ -15,6 +15,10 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Reflection;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace BibliotecaAPI
 {
@@ -31,7 +35,7 @@ namespace BibliotecaAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddNewtonsoftJson(x =>
-                x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore                
+                x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
 
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -46,12 +50,37 @@ namespace BibliotecaAPI
                             new Microsoft.OpenApi.Models.OpenApiInfo()
                             {
                                 Title = "Documentación del API Biblioteca",
-                                Description="Esta es la documentación oficial de esta api experimental y didáctica"
+                                Description = "Esta es la documentación oficial de esta api experimental y didáctica"
                             }
                         );
                     config.IncludeXmlComments(xlmPath);
                     //config.ResolveConflictingActions(apidescriptions => apidescriptions.First());
-                }                    
+                }
+            );
+
+            //***** Configuracion de servicios para JWT *****
+            //autorizacion
+            services.AddAuthorization(options =>
+                options.DefaultPolicy =
+                new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme).RequireAuthenticatedUser().Build()
+            );
+
+            var issuer = Configuration["AuthenticationSettings:Issuer"];
+            var audience = Configuration["AuthenticationSettings:Audience"];
+            var signinKey = Configuration["AuthenticationSettings:SigninKey"];
+            //autenticacion
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+                {
+                    options.Audience = audience;
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = issuer,
+                        ValidateIssuerSigningKey = true,
+                        ValidateLifetime = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(signinKey))
+                    };
+                }
             );
 
         }
@@ -59,6 +88,9 @@ namespace BibliotecaAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //Configurando la aplicación para JWT
+            //app.UseAuthentication();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
