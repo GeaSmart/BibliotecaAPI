@@ -1,0 +1,261 @@
+{
+	"info": {
+		"_postman_id": "7f4b24f1-cb3b-4b6c-96d1-ed440548f425",
+		"name": "Biblioteca API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AUTORES",
+			"item": [
+				{
+					"name": "/api/autores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44359/api/autores",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44359",
+							"path": [
+								"api",
+								"autores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/autores/1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44359/api/autores/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44359",
+							"path": [
+								"api",
+								"autores",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/autores",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":{{nombre}},\r\n    \"fechaInscripcion\":{{fechaInscripcion}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44359/api/autores",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44359",
+							"path": [
+								"api",
+								"autores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/autores/1",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":3,\r\n    \"nombre\":\"Julio Lopes\",\r\n    \"fechaInscripcion\":\"2020-01-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44359/api/autores/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44359",
+							"path": [
+								"api",
+								"autores",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/autores/1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44359/api/autores/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44359",
+							"path": [
+								"api",
+								"autores",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LIBROS",
+			"item": [
+				{
+					"name": "/api/libros",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44359/api/libros",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44359",
+							"path": [
+								"api",
+								"libros"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/libros/1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44359/api/libros/{{id}}",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44359",
+							"path": [
+								"api",
+								"libros",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/libros",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\":\"El cantar del mio cid\",\r\n    \"autorid\":5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44359/api/libros",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44359",
+							"path": [
+								"api",
+								"libros"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/libros/1",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1,\r\n    \"titulo\":\"Los salmos del mio cid\",\r\n    \"autorid\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44359/api/libros/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44359",
+							"path": [
+								"api",
+								"libros",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/libros/1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44359/api/libros/2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44359",
+							"path": [
+								"api",
+								"libros",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
