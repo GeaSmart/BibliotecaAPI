@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using BibliotecaAPI.Services.Contracts;
 
 namespace BibliotecaAPI
 {
@@ -33,7 +34,9 @@ namespace BibliotecaAPI
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {            
+            services.AddScoped(typeof(IAuthService), typeof(AuthService));//Inyectamos servicio que hemos creado AuthService
+
             services.AddControllers().AddNewtonsoftJson(x =>
                 x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
@@ -67,7 +70,8 @@ namespace BibliotecaAPI
 
             var issuer = Configuration["AuthenticationSettings:Issuer"];
             var audience = Configuration["AuthenticationSettings:Audience"];
-            var signinKey = Configuration["AuthenticationSettings:SigninKey"];
+            var signinKey = Configuration["AuthenticationSettings:SigningKey"];
+            
             //autenticacion
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
                 {
@@ -89,7 +93,7 @@ namespace BibliotecaAPI
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             //Configurando la aplicación para JWT
-            //app.UseAuthentication();
+            app.UseAuthentication();
 
             if (env.IsDevelopment())
             {

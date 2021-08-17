@@ -1,4 +1,5 @@
 ﻿using BibliotecaAPI.Entidades;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -24,7 +25,7 @@ namespace BibliotecaAPI.Controllers
         {
             return await context.Libro.ToListAsync();
         }
-
+        [Authorize]
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Libro>> Get(int id)
         {
